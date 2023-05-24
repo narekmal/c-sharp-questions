@@ -28,9 +28,9 @@ static void Main(string[] args)
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: 
+#### Output: 
 Abc from B
-
+#### Explanation: 
 Contrary to Java, in C# a class is defined as a component that attempts to be self-sufficient whenever possible. So, the compiler first is looking at the class itself and attempts to resolve a symbol that is requested.
 
 </p>
@@ -54,11 +54,35 @@ static void Main(string[] args)
 <details><summary><b>Answer</b></summary>
 <p>
 
-#### Answer: 
+#### Output: 
 str == null <br/>
 1/1/0001 12:00:00 AM
-
+#### Explanation: 
 Both variables are not initialized, but a string is a reference type and DateTime is a value type. The default value of DateTime type is DateTime.MinValue, which equals 1/1/0001 12:00:00 AM.
+
+</p>
+</details>
+
+---
+
+###### 3. What's the output?
+
+```cs
+static void Main(string[] args)
+{
+    Console.WriteLine(Math.Round(6.5));
+    Console.WriteLine(Math.Round(11.5));
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+6<br/>
+12
+#### Explanation: 
+.NET uses "Banker's Rounding" (also known as "Round Half to Even") as the default rounding mechanism. In this method, if the number to be rounded is exactly halfway between two other numbers, it is rounded to the nearest even number. This method is often used in financial calculations to reduce bias.
 
 </p>
 </details>
