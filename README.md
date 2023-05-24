@@ -1,6 +1,46 @@
 ###### 1. What's the output?
 
 ```cs
+class A
+{
+    public void Abc(int q)
+    {
+        Console.WriteLine("Abc from A");
+    }
+}
+
+class B : A
+{
+    public void Abc(double p)
+    {
+        Console.WriteLine("Abc from B");
+    }
+}
+
+static void Main(string[] args)
+{
+    int i = 5;
+    B b = new B();
+    b.Abc(i);
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Answer: 
+Abc from B
+
+Contrary to Java, in C# a class is defined as a component that attempts to be self-sufficient whenever possible. So, the compiler first is looking at the class itself and attempts to resolve a symbol that is requested.
+
+</p>
+</details>
+
+---
+
+###### 2. What's the output?
+
+```cs
 static String str;
 static DateTime time;
 
@@ -23,4 +63,3 @@ Both variables are not initialized, but a string is a reference type and DateTim
 </p>
 </details>
 
----
