@@ -87,3 +87,46 @@ static void Main(string[] args)
 </p>
 </details>
 
+---
+
+###### 4. What's the output?
+
+```cs
+delegate void SomeMethod();
+
+static void Main(string[] args)
+{
+    List<SomeMethod> delList = new List<SomeMethod>();
+    for (int i = 0; i < 10; i++)
+    {
+        delList.Add(delegate { Console.WriteLine(i); });
+    }
+
+    foreach (var del in delList)
+    {
+        del();
+    }
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+10  
+10  
+10  
+10  
+10  
+10  
+10  
+10  
+10  
+10
+
+#### Explanation: 
+The tricky part here is understanding closures in C#. When the delegate is created, a closure is created, which captures the variable i by reference, not by value. This means that when the delegate is invoked, it will use the value of i at the time of invocation (which is 10), not the value of i at the time the delegate was created. If you wanted each delegate to remember the value of i at the time it was created, you would need to create a temporary variable inside the loop, assign i to it, and use that in the delegate.
+
+</p>
+</details>
+
