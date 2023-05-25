@@ -1,3 +1,10 @@
+<div align="center">
+  <img height="120" src="https://play-lh.googleusercontent.com/uGqP7F-E_eaEwTb3hMz63MWf0YKRSK6n9INBwibBSOrGDg6B3sd-ACuqNrR312ohdQ">
+  <h1>Curated List of C# Questions & Answers</h1>
+</div>
+
+---
+
 ###### 1. What's the output?
 
 ```cs
