@@ -130,3 +130,37 @@ The tricky part here is understanding closures in C#. When the delegate is creat
 </p>
 </details>
 
+---
+
+###### 5. What's the output?
+
+```cs
+static void Main(string[] args)
+{
+    string hello = "hello";
+    string helloWorld = "hello world";
+    string helloWorld2 = "hello world";
+    string helloWorld3 = hello + " world";
+
+    Console.WriteLine(helloWorld == helloWorld2);
+    Console.WriteLine(object.ReferenceEquals(helloWorld, helloWorld2));
+    Console.WriteLine(object.ReferenceEquals(helloWorld, helloWorld3));
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+True  
+True  
+False
+
+#### Explanation: 
+1. This line checks if the values of helloWorld and helloWorld2 are equal.
+2. This line checks if helloWorld and helloWorld2 refer to the exact same object. In C#, the .NET runtime performs a process called string interning for literal strings. This means that when you have two or more identical string literals in your code, the runtime only creates one string object, and all variables that are assigned that string literal actually refer to the same object.
+3. In this line, helloWorld3 is created by concatenating hello and " world", which creates a new string object. So even though the value of helloWorld3 is also "hello world", it's not the same object as helloWorld.
+
+</p>
+</details>
+
