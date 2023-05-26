@@ -48,57 +48,6 @@ Contrary to Java, in C# a class is defined as a component that attempts to be se
 ###### 2. What's the output?
 
 ```cs
-static String str;
-static DateTime time;
-
-static void Main(string[] args)
-{
-    Console.WriteLine(str == null ? "str == null" : str);
-    Console.WriteLine(time == null ? "time == null" : time.ToString());
-}
-```
-
-<details><summary><b>Answer</b></summary>
-<p>
-
-#### Output: 
-str == null <br/>
-1/1/0001 12:00:00 AM
-#### Explanation: 
-Both variables are not initialized, but a string is a reference type and DateTime is a value type. The default value of DateTime type is DateTime.MinValue, which equals 1/1/0001 12:00:00 AM.
-
-</p>
-</details>
-
----
-
-###### 3. What's the output?
-
-```cs
-static void Main(string[] args)
-{
-    Console.WriteLine(Math.Round(6.5));
-    Console.WriteLine(Math.Round(11.5));
-}
-```
-
-<details><summary><b>Answer</b></summary>
-<p>
-
-#### Output: 
-6<br/>
-12
-#### Explanation: 
-.NET uses "Banker's Rounding" (also known as "Round Half to Even") as the default rounding mechanism. In this method, if the number to be rounded is exactly halfway between two other numbers, it is rounded to the nearest even number. This method is often used in financial calculations to reduce bias.
-
-</p>
-</details>
-
----
-
-###### 4. What's the output?
-
-```cs
 delegate void SomeMethod();
 
 static void Main(string[] args)
@@ -139,6 +88,57 @@ The tricky part here is understanding closures in C#. When the delegate is creat
 
 ---
 
+###### 3. What's the output?
+
+```cs
+static String str;
+static DateTime time;
+
+static void Main(string[] args)
+{
+    Console.WriteLine(str == null ? "str == null" : str);
+    Console.WriteLine(time == null ? "time == null" : time.ToString());
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+str == null <br/>
+1/1/0001 12:00:00 AM
+#### Explanation: 
+Both variables are not initialized, but a string is a reference type and DateTime is a value type. The default value of DateTime type is DateTime.MinValue, which equals 1/1/0001 12:00:00 AM.
+
+</p>
+</details>
+
+---
+
+###### 4. What's the output?
+
+```cs
+static void Main(string[] args)
+{
+    Console.WriteLine(Math.Round(6.5));
+    Console.WriteLine(Math.Round(11.5));
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+6<br/>
+12
+#### Explanation: 
+.NET uses "Banker's Rounding" (also known as "Round Half to Even") as the default rounding mechanism. In this method, if the number to be rounded is exactly halfway between two other numbers, it is rounded to the nearest even number. This method is often used in financial calculations to reduce bias.
+
+</p>
+</details>
+
+---
+
 ###### 5. What's the output?
 
 ```cs
@@ -170,4 +170,105 @@ False
 
 </p>
 </details>
+
+---
+
+###### 6. What's the output?
+
+```cs
+public class TestStatic {
+    public static int TestValue;
+
+    public TestStatic() {
+        if (TestValue == 0) {
+            TestValue = 5;
+        }
+    }
+    static TestStatic() {
+        if (TestValue == 0) {
+            TestValue = 10;
+        }
+    }
+
+    public void Print() {
+        if (TestValue == 5) {
+            TestValue = 6;
+        }
+
+        Console.WriteLine("TestValue : " + TestValue);
+    }
+}
+
+public void Main(string[] args) {
+    TestStatic t = new TestStatic();
+    t.Print();
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+TestValue : 10
+
+#### Explanation: 
+In C#, a static constructor (also called a type initializer) is called automatically before the first instance is created or any static members are referenced. During the execution of the static constructor, TestValue is 0, so it is set to 10. After that, the instance constructor is run, and than t.Print() is called, but these methods don't change TestValue.
+
+</p>
+</details>
+
+---
+
+###### 7. What's the output?
+
+```cs
+using System.Threading.Tasks;
+
+public static void Main(string[] args)
+{
+    Console.WriteLine("Main start");
+    Method1();
+    Console.WriteLine("Main end");
+    Console.ReadLine();
+}
+
+public static async void Method1()
+{
+    Console.WriteLine("Method1 start");
+    await Method2();
+    Console.WriteLine("Method1 end");
+}
+
+public static async Task Method2()
+{
+    Console.WriteLine("Method2 start");
+    await Task.Delay(1000);
+    Console.WriteLine("Method2 end");
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+Main start  
+Method1 start  
+Method2 start  
+Main end  
+Method2 end  
+Method1 end
+
+#### Explanation: 
+The Main method prints "Main start".  
+Next, Method1() is called. This is an async method which starts by printing "Method1 start".  
+Method1() then calls Method2() using await, meaning it will asynchronously wait for Method2() to complete before it continues. Method2() is an async method that returns a Task. It starts by printing "Method2 start".  
+Inside Method2(), we call await Task.Delay(1000). This will pause Method2() for 1 second, during which control is returned back to the calling method.  
+Since we are awaiting Method2() in Method1(), control is returned back to the Main method. The "Main end" message is printed.  
+The Console.ReadLine() at the end of Main method keeps the program running, which allows us to see the delayed output from the other methods.  
+After the delay in Method2(), it prints "Method2 end" and completes.  
+Since Method1() was awaiting Method2(), after Method2() completes, control is returned back to Method1() which then prints "Method1 end" and completes.
+
+</p>
+</details>
+
 
