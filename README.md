@@ -271,4 +271,39 @@ Since Method1() was awaiting Method2(), after Method2() completes, control is re
 </p>
 </details>
 
+---
+
+###### 8. What's the output?
+
+```cs
+class A<T>  
+{ 
+    static A() 
+    { 
+        SomeStaticObject = new object(); 
+    } 
+
+    public static object SomeStaticObject; 
+}
+
+void Main() 
+{ 
+    Console.WriteLine(Object.ReferenceEquals(A<int>.SomeStaticObject, A<string>.SomeStaticObject)); 
+    Console.WriteLine(Object.ReferenceEquals(A<int>.SomeStaticObject, A<int>.SomeStaticObject)); 
+} 
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+False  
+True
+
+#### Explanation: 
+The static constructor for `A<int>` is not the same as for `A<string>` because `A<int>` and `A<string>` are considered two different types due to the generic parameters. So, the `SomeStaticObject` of `A<int>` and `A<string>` will be initialized independently, each one will point to a different object.
+
+</p>
+</details>
+
 
