@@ -306,4 +306,51 @@ The static constructor for `A<int>` is not the same as for `A<string>` because `
 </p>
 </details>
 
+---
+
+###### 9. What's the output?
+
+```cs
+using System;
+using System.Reflection;
+
+public class Example
+{
+    public readonly int ReadOnlyField;
+
+    public Example(int value)
+    {
+        ReadOnlyField = value;
+    }
+}
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        Example example = new Example(10);
+        Console.WriteLine($"Before applying reflection: {example.ReadOnlyField}");
+
+        // Applying reflection to change the value of readonly field
+        var field = typeof(Example).GetField("ReadOnlyField");
+        field.SetValue(example, 20);
+
+        Console.WriteLine($"After applying reflection: {example.ReadOnlyField}");
+    }
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+Before applying reflection: 10  
+After applying reflection: 20
+
+#### Explanation: 
+It's possible to use Reflection to change the value of a `readonly` field, though doing so can lead to unexpected behavior and is generally not recommended as it violates the principle of immutability that `readonly` keyword is meant to enforce.
+
+</p>
+</details>
+
 
