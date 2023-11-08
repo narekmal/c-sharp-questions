@@ -5,7 +5,7 @@
 
 ---
 
-###### 1. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 1. What's the output?
 
 ```cs
 class A
@@ -45,7 +45,7 @@ Contrary to Java, in C# a class is defined as a component that attempts to be se
 
 ---
 
-###### 2. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 2. What's the output?
 
 ```cs
 delegate void SomeMethod();
@@ -88,7 +88,7 @@ The tricky part here is understanding closures in C#. When the delegate is creat
 
 ---
 
-###### 3. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 3. What's the output?
 
 ```cs
 static String str;
@@ -115,7 +115,7 @@ Both variables are not initialized, but a string is a reference type and DateTim
 
 ---
 
-###### 4. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 4. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -139,7 +139,7 @@ static void Main(string[] args)
 
 ---
 
-###### 5. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 5. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -173,7 +173,7 @@ False
 
 ---
 
-###### 6. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 6. What's the output?
 
 ```cs
 public class TestStatic {
@@ -219,7 +219,7 @@ In C#, a static constructor (also called a type initializer) is called automatic
 
 ---
 
-###### 7. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 7. What's the output?
 
 ```cs
 using System.Threading.Tasks;
@@ -273,7 +273,7 @@ Since Method1() was awaiting Method2(), after Method2() completes, control is re
 
 ---
 
-###### 8. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 8. What's the output?
 
 ```cs
 class A<T>  
@@ -308,7 +308,7 @@ The static constructor for `A<int>` is not the same as for `A<string>` because `
 
 ---
 
-###### 9. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 9. What's the output?
 
 ```cs
 using System;
@@ -355,7 +355,7 @@ It's possible to use Reflection to change the value of a `readonly` field, thoug
 
 ---
 
-###### 10. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 10. What's the output?
 
 ```cs
 var s = new S();
@@ -395,7 +395,7 @@ False
 
 ---
 
-###### 11. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> 11. What's the output?
 
 ```cs
 class Program
