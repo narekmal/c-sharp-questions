@@ -353,4 +353,44 @@ It's possible to use Reflection to change the value of a `readonly` field, thoug
 </p>
 </details>
 
+---
+
+###### 10. What's the output?
+
+```cs
+var s = new S();
+
+using (s)
+{
+    Console.WriteLine(s.GetDispose());
+}
+Console.WriteLine(s.GetDispose());
+
+public struct S : IDisposable
+{
+    private bool dispose;
+    public void Dispose()
+    {
+        dispose = true;
+    }
+    public bool GetDispose()
+    {
+        return dispose;
+    }
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+False  
+False
+
+#### Explanation: 
+`using` makes a copy of the value type, and you are therefore disposing a copy, not the original. More details: https://ericlippert.com/2011/03/14/to-box-or-not-to-box/
+
+</p>
+</details>
+
 
