@@ -393,4 +393,41 @@ False
 </p>
 </details>
 
+---
+
+###### 11. What's the output?
+
+```cs
+class Program
+{
+    private static Object syncObject = new Object();
+    private static void Write()
+    {
+        lock (syncObject)
+        {
+            Console.WriteLine("test");
+        }
+    }
+    static void Main(string[] args)
+    {
+        lock (syncObject)
+        {
+            Write();
+        }
+    }
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+test  
+
+#### Explanation: 
+The `Write` method attempts to acquire a lock on the same `syncObject`. Normally, this could be a problem—if another thread were involved, it would result in a deadlock because the `Main` method already holds the lock. However, in this case, since there are no multiple threads involved, the lock is re-entrant. A re-entrant lock means that the same thread can acquire the same lock multiple times without causing a deadlock. It already holds the lock, so it is allowed to proceed.
+
+</p>
+</details>
+
 
