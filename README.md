@@ -430,4 +430,34 @@ The `Write` method attempts to acquire a lock on the same `syncObject`. Normally
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 12. What's the output?
+
+```cs
+int a = 0;
+int Foo()
+{
+    a = a + 42;
+    return 1;
+}
+void Main()
+{
+    a += Foo();
+    Console.WriteLine(a);
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+1  
+
+#### Explanation: 
+`a += Foo()` will be converted to `a = a + Foo()`. Firstly, left operand will be evaluated, which is 0, then, right operand will be evaluated, which returns 1, so the result will be 1, despite the fact that `a` is reassigned inside `Foo()`.
+
+</p>
+</details>
+
 
