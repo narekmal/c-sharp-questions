@@ -501,4 +501,67 @@ When calling `Monitor.Wait(sync)`, `sync` object is released before waiting for 
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 14. What's the output?
+
+```cs
+void Foo(object a)
+{
+    Console.WriteLine("object");
+}
+void Foo(object a, object b)
+{
+    Console.WriteLine("object, object");
+}
+void Foo(params object[] args)
+{
+    Console.WriteLine("params object[]");
+}
+void Foo<T>(params T[] args)
+{
+    Console.WriteLine("params T[]");
+}
+class Bar { }
+void Main()
+{
+    Foo();
+    Foo(null);
+    Foo(new Bar());
+    Foo(new Bar(), new Bar());
+    Foo(new Bar(), new object());
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+params object[]  
+params object[]  
+params T[]  
+params T[]  
+object, object
+
+#### Explanation: 
+Let's look at each case.
+
+`Foo()` -> `params object[]`  
+Versions `object, object`, `object` are not suitable because of number of arguments. Version `params T[]` is not suitable, because `T` can't be resolved. Thus, correct version is `params object[]`.
+
+`Foo(null)` -> `params object[]`  
+Version `object, object` is not suitable because of number of arguments. Version `params T[]` is not suitable, because `T` can't be resolved. From the two remaining versions compiler will choose `params object[]` - I don't know why :) 
+
+`Foo(new Bar())` -> `params T[]`  
+Version `object, object` is not suitable because of number of arguments. Versions `object` and `params object[]` will require additional cast of `Bar` to `object`, thus, `params T[]` is more preferrable.
+
+`Foo(new Bar(), new Bar())` -> `params T[]`  
+Version `object` is not suitable because of number of arguments. Versions `object, object` and `params object[]` will require additional cast of `Bar` to `object`, thus, `params T[]` is more preferrable.
+
+`Foo(new Bar(), new object())` -> `object, object`  
+Version `object` is not suitable because of number of arguments. Among the remaining versions `object, object` is the most specific one.
+
+</p>
+</details>
+
 
