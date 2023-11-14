@@ -460,4 +460,51 @@ void Main()
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 13. What's the output?
+
+```cs
+static void Main(string[] args)
+{
+    object sync = new object();
+    var thread = new Thread(()=>
+    {
+        try
+        {
+            Work();
+        }
+        finally
+        {
+            lock (sync)
+            {
+                Monitor.PulseAll(sync);
+            }
+        }
+    });
+    thread.Start();
+    lock (sync)
+    {
+        Monitor.Wait(sync);
+    }
+    Console.WriteLine("test");
+}
+private static void Work()
+{
+    Thread.Sleep(1000);
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+test
+
+#### Explanation: 
+When calling `Monitor.Wait(sync)`, `sync` object is released before waiting for pulsing. Therefore, the thread is able to enter `lock` block and call `Monitor.PulseAll(sync)`, which awakens the main thread.
+
+</p>
+</details>
+
 
