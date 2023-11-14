@@ -276,32 +276,26 @@ Since Method1() was awaiting Method2(), after Method2() completes, control is re
 ###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 8. What's the output?
 
 ```cs
-class A<T>  
-{ 
-    static A() 
-    { 
-        SomeStaticObject = new object(); 
-    } 
-
-    public static object SomeStaticObject; 
+class Foo<T>
+{
+    public static int Bar;
 }
 
-void Main() 
-{ 
-    Console.WriteLine(Object.ReferenceEquals(A<int>.SomeStaticObject, A<string>.SomeStaticObject)); 
-    Console.WriteLine(Object.ReferenceEquals(A<int>.SomeStaticObject, A<int>.SomeStaticObject)); 
-} 
+void Main()
+{
+    Foo<int>.Bar++;
+    Console.WriteLine(Foo<double>.Bar);
+}
 ```
 
 <details><summary><b>Answer</b></summary>
 <p>
 
 #### Output: 
-False  
-True
+0
 
 #### Explanation: 
-The static constructor for `A<int>` is not the same as for `A<string>` because `A<int>` and `A<string>` are considered two different types due to the generic parameters. So, the `SomeStaticObject` of `A<int>` and `A<string>` will be initialized independently, each one will point to a different object.
+`Foo<int>` and `Foo<double>` are considered two different types due to the generic parameter. So, the `Bar` of `Foo<int>` is different from `Bar` of `Foo<double>`.
 
 </p>
 </details>
