@@ -571,13 +571,13 @@ Version `object` is not suitable because of number of arguments. Among the remai
 ```cs
 IEnumerable<string> Foo()
 {
-	  yield return "Bar";
-	  Console.WriteLine("Baz");
+    yield return "Bar";
+    Console.WriteLine("Baz");
 }
 void Main()
 {
-	  foreach (var str in Foo())
-		  Console.WriteLine(str);
+    foreach (var str in Foo())
+        Console.WriteLine(str);
 }
 ```
 
