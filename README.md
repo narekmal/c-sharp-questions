@@ -564,4 +564,34 @@ Version `object` is not suitable because of number of arguments. Among the remai
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 15. What's the output?
+
+```cs
+IEnumerable<string> Foo()
+{
+	  yield return "Bar";
+	  Console.WriteLine("Baz");
+}
+void Main()
+{
+	  foreach (var str in Foo())
+		  Console.WriteLine(str);
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+Bar  
+Baz
+
+#### Explanation: 
+First iteration of foreach `yield return`s "Bar" which is written to console. Second iteration tries to find another `yield return` (meanwhile writing to console "Baz") but finds nothing and the loop ends.
+
+</p>
+</details>
+
 
