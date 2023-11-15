@@ -594,4 +594,29 @@ First iteration of foreach `yield return`s "Bar" which is written to console. Se
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 16. What's the output?
+
+```cs
+var list = new List<string> { "Foo", "Bar", "Baz" };
+var startLetter = "F";
+var query = list.Where(c => c.StartsWith(startLetter));
+startLetter = "B";
+query = query.Where(c => c.StartsWith(startLetter));
+Console.WriteLine(query.Count());
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+2
+
+#### Explanation: 
+Because of deferred execution, queries are executed only at the point `query.Count()` is called. At this point, both filters are applied with `startLetter` set to "B".
+
+</p>
+</details>
+
 
