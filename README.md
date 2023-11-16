@@ -619,4 +619,39 @@ Because of deferred execution, queries are executed only at the point `query.Cou
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 17. What's the output?
+
+```cs
+var bar = new Bar { Foo = new Foo() };
+bar.Foo.Change(5);
+Console.WriteLine(bar.Foo.Value);
+
+public struct Foo
+{
+    public int Value;
+    public void Change(int newValue)
+    {
+        Value = newValue;
+    }
+}
+public class Bar
+{
+    public Foo Foo { get; set; }
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+0
+
+#### Explanation: 
+Structs are copied by value, not by reference. When we refer to property `bar.Foo`, the method `bar.get_Foo()` is called, which returns us the copy of the structure, thus, the original structure remains unchanged. Then, when calling `WriteLine`, we again refer to the same property and are printing `Value` of a new copy of `Foo`, which is 0.
+
+</p>
+</details>
+
 
