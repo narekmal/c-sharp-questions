@@ -654,4 +654,31 @@ Structs are copied by value, not by reference. When we refer to property `bar.Fo
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 18. What's the output?
+
+```cs
+try
+{
+    Console.WriteLine(((string)null + null + null) == "");
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.GetType());
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+True
+
+#### Explanation: 
+If an operand of string concatenation is null, an empty string is substituted.
+
+</p>
+</details>
+
 
