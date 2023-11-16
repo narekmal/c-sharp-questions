@@ -681,4 +681,32 @@ If an operand of string concatenation is null, an empty string is substituted.
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 19. What's the output?
+
+```cs
+var x = "AB";
+var y = new System.Text.StringBuilder().Append('A').Append('B').ToString();
+var z = string.Intern(y);
+Console.WriteLine(x == y);
+Console.WriteLine(x == z);
+Console.WriteLine((object)x == (object)y);
+Console.WriteLine((object)x == (object)z);
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+True  
+True  
+False  
+True
+
+#### Explanation: 
+First two will print `True`, because we are comparing by value. Next two are comparing by reference. `x` points to interned string `"AB"` as it's declared with string literal. `z` points to the same interned string as it's defined with method `string.Intern`. But `y` will point to other memory location as it's defined with `StringBuilder`, which doesn't consider interned strings when calling `ToString()`.
+
+</p>
+</details>
 
