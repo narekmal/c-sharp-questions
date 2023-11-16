@@ -710,3 +710,27 @@ First two will print `True`, because we are comparing by value. Next two are com
 </p>
 </details>
 
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 20. What's the output?
+
+```cs
+Console.WriteLine(1 + 2 + 'A');
+Console.WriteLine(1 + 'A' + 2);
+Console.WriteLine('A' + 1 + 2);
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+68  
+68  
+68
+
+#### Explanation: 
+When adding types `Int32` and `Char`, conversion of `Char` to `Int32` happens. Thus, in all 3 cases result will be the code of symbol `'A'` (65) increased by 3.
+
+</p>
+</details>
+
