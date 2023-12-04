@@ -1,7 +1,37 @@
 <div align="center">
   <img height="120" src="https://play-lh.googleusercontent.com/uGqP7F-E_eaEwTb3hMz63MWf0YKRSK6n9INBwibBSOrGDg6B3sd-ACuqNrR312ohdQ">
   <h1>Tricky C# Questions & Answers</h1>
+  <p>Test your C# knowledge before an interview with these questions of type "what's the output of the following code snippet". In many cases you'll find answers surprising. Please leave a star if you find this useful.</p>
 </div>
+
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 8. What's the output?
+
+```cs
+class Foo<T>
+{
+    public static int Bar;
+}
+
+void Main()
+{
+    Foo<int>.Bar++;
+    Console.WriteLine(Foo<double>.Bar);
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+0
+
+#### Explanation: 
+`Foo<int>` and `Foo<double>` are considered two different types due to the generic parameter. So, the `Bar` of `Foo<int>` is different from `Bar` of `Foo<double>`.
+
+</p>
+</details>
 
 ---
 
@@ -271,34 +301,7 @@ Since Method1() was awaiting Method2(), after Method2() completes, control is re
 </p>
 </details>
 
----
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 8. What's the output?
-
-```cs
-class Foo<T>
-{
-    public static int Bar;
-}
-
-void Main()
-{
-    Foo<int>.Bar++;
-    Console.WriteLine(Foo<double>.Bar);
-}
-```
-
-<details><summary><b>Answer</b></summary>
-<p>
-
-#### Output: 
-0
-
-#### Explanation: 
-`Foo<int>` and `Foo<double>` are considered two different types due to the generic parameter. So, the `Bar` of `Foo<int>` is different from `Bar` of `Foo<double>`.
-
-</p>
-</details>
 
 ---
 
