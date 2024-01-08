@@ -38,29 +38,36 @@ void Main()
 ###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 2. What's the output?
 
 ```cs
-var x = "AB";
-var y = new System.Text.StringBuilder().Append('A').Append('B').ToString();
-var z = string.Intern(y);
-Console.WriteLine(x == y);
-Console.WriteLine(x == z);
-Console.WriteLine((object)x == (object)y);
-Console.WriteLine((object)x == (object)z);
+var bar = new Bar { Foo = new Foo() };
+bar.Foo.Change(5);
+Console.WriteLine(bar.Foo.Value);
+
+public struct Foo
+{
+    public int Value;
+    public void Change(int newValue)
+    {
+        Value = newValue;
+    }
+}
+public class Bar
+{
+    public Foo Foo { get; set; }
+}
 ```
 
 <details><summary><b>Answer</b></summary>
 <p>
 
 #### Output: 
-True  
-True  
-False  
-True
+0
 
 #### Explanation: 
-First two will print `True`, because we are comparing by value. Next two are comparing by reference. `x` points to interned string `"AB"` as it's declared with string literal. `z` points to the same interned string as it's defined with method `string.Intern`. But `y` will point to other memory location as it's defined with `StringBuilder`, which doesn't consider interned strings when calling `ToString()`.
+Structs are copied by value, not by reference. When we refer to property `bar.Foo`, the method `bar.get_Foo()` is called, which returns us the copy of the structure, thus, the original structure remains unchanged. Then, when calling `WriteLine`, we again refer to the same property and are printing `Value` of a new copy of `Foo`, which is 0.
 
 </p>
 </details>
+
 
 ---
 
@@ -677,39 +684,31 @@ First iteration of foreach `yield return`s "Bar" which is written to console. Se
 </p>
 </details>
 
-
-
 ---
 
 ###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 19. What's the output?
 
 ```cs
-var bar = new Bar { Foo = new Foo() };
-bar.Foo.Change(5);
-Console.WriteLine(bar.Foo.Value);
-
-public struct Foo
-{
-    public int Value;
-    public void Change(int newValue)
-    {
-        Value = newValue;
-    }
-}
-public class Bar
-{
-    public Foo Foo { get; set; }
-}
+var x = "AB";
+var y = new System.Text.StringBuilder().Append('A').Append('B').ToString();
+var z = string.Intern(y);
+Console.WriteLine(x == y);
+Console.WriteLine(x == z);
+Console.WriteLine((object)x == (object)y);
+Console.WriteLine((object)x == (object)z);
 ```
 
 <details><summary><b>Answer</b></summary>
 <p>
 
 #### Output: 
-0
+True  
+True  
+False  
+True
 
 #### Explanation: 
-Structs are copied by value, not by reference. When we refer to property `bar.Foo`, the method `bar.get_Foo()` is called, which returns us the copy of the structure, thus, the original structure remains unchanged. Then, when calling `WriteLine`, we again refer to the same property and are printing `Value` of a new copy of `Foo`, which is 0.
+First two will print `True`, because we are comparing by value. Next two are comparing by reference. `x` points to interned string `"AB"` as it's declared with string literal. `z` points to the same interned string as it's defined with method `string.Intern`. But `y` will point to other memory location as it's defined with `StringBuilder`, which doesn't consider interned strings when calling `ToString()`.
 
 </p>
 </details>
@@ -741,3 +740,12 @@ If an operand of string concatenation is null, an empty string is substituted.
 </p>
 </details>
 
+---
+
+<br>
+<br>
+
+
+### Sources
+* https://github.com/AndreyAkinshin/ProblemBook.NET
+* https://metanit.com/sharp/interview
