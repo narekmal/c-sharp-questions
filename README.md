@@ -38,21 +38,10 @@ void Main()
 ###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 2. What's the output?
 
 ```cs
-var bar = new Bar { Foo = new Foo() };
-bar.Foo.Change(5);
-Console.WriteLine(bar.Foo.Value);
-
-public struct Foo
+static void Main(string[] args)
 {
-    public int Value;
-    public void Change(int newValue)
-    {
-        Value = newValue;
-    }
-}
-public class Bar
-{
-    public Foo Foo { get; set; }
+    Console.WriteLine(Math.Round(6.5));
+    Console.WriteLine(Math.Round(11.5));
 }
 ```
 
@@ -60,14 +49,13 @@ public class Bar
 <p>
 
 #### Output: 
-0
-
+6<br/>
+12
 #### Explanation: 
-Structs are copied by value, not by reference. When we refer to property `bar.Foo`, the method `bar.get_Foo()` is called, which returns us the copy of the structure, thus, the original structure remains unchanged. Then, when calling `WriteLine`, we again refer to the same property and are printing `Value` of a new copy of `Foo`, which is 0.
+.NET uses "Banker's Rounding" (also known as "Round Half to Even") as the default rounding mechanism. In this method, if the number to be rounded is exactly halfway between two other numbers, it is rounded to the nearest even number. This method is often used in financial calculations to reduce bias.
 
 </p>
 </details>
-
 
 ---
 
@@ -98,6 +86,135 @@ When adding types `Int32` and `Char`, conversion of `Char` to `Int32` happens. T
 ###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 4. What's the output?
 
 ```cs
+static String str;
+static DateTime time;
+
+static void Main(string[] args)
+{
+    Console.WriteLine(str == null ? "str == null" : str);
+    Console.WriteLine(time == null ? "time == null" : time.ToString());
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+str == null <br/>
+1/1/0001 12:00:00 AM
+#### Explanation: 
+Both variables are not initialized, but a string is a reference type and DateTime is a value type. The default value of DateTime type is DateTime.MinValue, which equals 1/1/0001 12:00:00 AM.
+
+</p>
+</details>
+
+
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 5. What's the output?
+
+```cs
+var bar = new Bar { Foo = new Foo() };
+bar.Foo.Change(5);
+Console.WriteLine(bar.Foo.Value);
+
+public struct Foo
+{
+    public int Value;
+    public void Change(int newValue)
+    {
+        Value = newValue;
+    }
+}
+public class Bar
+{
+    public Foo Foo { get; set; }
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+0
+
+#### Explanation: 
+Structs are copied by value, not by reference. When we refer to property `bar.Foo`, the method `bar.get_Foo()` is called, which returns us the copy of the structure, thus, the original structure remains unchanged. Then, when calling `WriteLine`, we again refer to the same property and are printing `Value` of a new copy of `Foo`, which is 0.
+
+</p>
+</details>
+
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 6. What's the output?
+
+```cs
+foreach (Foo current in Baz().ToList())
+{
+    Console.WriteLine(current.Bar);
+}
+Console.WriteLine("--delimiter--");
+foreach (Foo current in Baz())
+{
+    Console.WriteLine(current.Bar);
+}
+
+IEnumerable<Foo> Baz() 
+{
+    Foo instance = new Foo();
+  
+    for (int i=0; i<10; i++)
+    {
+        instance.Bar++;
+        yield return instance;
+    }
+}
+
+class Foo 
+{
+    public int Bar {get; set;}
+}
+```
+
+<details><summary><b>Answer</b></summary>
+<p>
+
+#### Output: 
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+10<br/>
+--delimiter--<br/>
+1<br/>
+2<br/>
+3<br/>
+4<br/>
+5<br/>
+6<br/>
+7<br/>
+8<br/>
+9<br/>
+10<br/>
+#### Explanation: 
+In the first loop we turn `IEnumerable` to `List`, so we end up with a list of references to the same object. In the second loop we print the value of `Bar` as we iterate over the `IEnumerable`.
+
+</p>
+</details>
+
+
+
+
+---
+
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 7. What's the output?
+
+```cs
 var list = new List<string> { "Foo", "Bar", "Baz" };
 var startLetter = "F";
 var query = list.Where(c => c.StartsWith(startLetter));
@@ -118,34 +235,10 @@ Because of deferred execution, queries are executed only at the point `query.Cou
 </p>
 </details>
 
----
-
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 5. What's the output?
-
-```cs
-static void Main(string[] args)
-{
-    Console.WriteLine(Math.Round(6.5));
-    Console.WriteLine(Math.Round(11.5));
-}
-```
-
-<details><summary><b>Answer</b></summary>
-<p>
-
-#### Output: 
-6<br/>
-12
-#### Explanation: 
-.NET uses "Banker's Rounding" (also known as "Round Half to Even") as the default rounding mechanism. In this method, if the number to be rounded is exactly halfway between two other numbers, it is rounded to the nearest even number. This method is often used in financial calculations to reduce bias.
-
-</p>
-</details>
-
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 6. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 8. What's the output?
 
 ```cs
 class A
@@ -185,7 +278,7 @@ Contrary to Java, in C# a class is defined as a component that attempts to be se
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 7. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 9. What's the output?
 
 ```cs
 delegate void SomeMethod();
@@ -226,37 +319,10 @@ The tricky part here is understanding closures in C#. When the delegate is creat
 </p>
 </details>
 
----
-
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 8. What's the output?
-
-```cs
-static String str;
-static DateTime time;
-
-static void Main(string[] args)
-{
-    Console.WriteLine(str == null ? "str == null" : str);
-    Console.WriteLine(time == null ? "time == null" : time.ToString());
-}
-```
-
-<details><summary><b>Answer</b></summary>
-<p>
-
-#### Output: 
-str == null <br/>
-1/1/0001 12:00:00 AM
-#### Explanation: 
-Both variables are not initialized, but a string is a reference type and DateTime is a value type. The default value of DateTime type is DateTime.MinValue, which equals 1/1/0001 12:00:00 AM.
-
-</p>
-</details>
-
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 9. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 10. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -290,7 +356,7 @@ False
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 10. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 11. What's the output?
 
 ```cs
 public class TestStatic {
@@ -336,7 +402,7 @@ In C#, a static constructor (also called a type initializer) is called automatic
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 11. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 12. What's the output?
 
 ```cs
 using System.Threading.Tasks;
@@ -392,7 +458,7 @@ Since Method1() was awaiting Method2(), after Method2() completes, control is re
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 12. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 13. What's the output?
 
 ```cs
 using System;
@@ -439,7 +505,7 @@ It's possible to use Reflection to change the value of a `readonly` field, thoug
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 13. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 14. What's the output?
 
 ```cs
 var s = new S();
@@ -479,7 +545,7 @@ False
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 14. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 15. What's the output?
 
 ```cs
 class Program
@@ -516,7 +582,7 @@ The `Write` method attempts to acquire a lock on the same `syncObject`. Normally
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 15. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 16. What's the output?
 
 ```cs
 int a = 0;
@@ -546,7 +612,7 @@ void Main()
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 16. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 17. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -593,7 +659,7 @@ When calling `Monitor.Wait(sync)`, `sync` object is released before waiting for 
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 17. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 18. What's the output?
 
 ```cs
 void Foo(object a)
@@ -656,7 +722,7 @@ Version `object` is not suitable because of number of arguments. Among the remai
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 18. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 19. What's the output?
 
 ```cs
 IEnumerable<string> Foo()
@@ -686,7 +752,7 @@ First iteration of foreach `yield return`s "Bar" which is written to console. Se
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 19. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 20. What's the output?
 
 ```cs
 var x = "AB";
@@ -715,7 +781,7 @@ First two will print `True`, because we are comparing by value. Next two are com
 
 ---
 
-###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 20. What's the output?
+###### <img align="center" height="40" src="https://svgur.com/i/9YV.svg"> &nbsp; 21. What's the output?
 
 ```cs
 try
@@ -747,5 +813,6 @@ If an operand of string concatenation is null, an empty string is substituted.
 
 
 ### Sources
+* Own experience
 * https://github.com/AndreyAkinshin/ProblemBook.NET
 * https://metanit.com/sharp/interview
