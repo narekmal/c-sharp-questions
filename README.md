@@ -1,12 +1,12 @@
 <div align="center">
-  <img height="120" src="https://narekmal.com/images/csharp.png">
+  <img height="120" src="https://narekmalk.com/images/csharp.png">
   <h1>Tricky C# Questions & Answers</h1>
   <p>Test your C# knowledge before an interview with these questions of type "what's the output of the following code snippet". In many cases you'll find answers surprising. Please leave a star if you find this useful.</p>
 </div>
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 1. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 1. What's the output?
 
 ```cs
 class Foo<T>
@@ -35,7 +35,7 @@ void Main()
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 2. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 2. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -59,7 +59,7 @@ static void Main(string[] args)
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 3. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 3. What's the output?
 
 ```cs
 Console.WriteLine(1 + 2 + 'A');
@@ -83,7 +83,7 @@ When adding types `Int32` and `Char`, conversion of `Char` to `Int32` happens. T
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 4. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 4. What's the output?
 
 ```cs
 static String str;
@@ -111,7 +111,7 @@ Both variables are not initialized, but a string is a reference type and DateTim
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 5. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 5. What's the output?
 
 ```cs
 var bar = new Bar { Foo = new Foo() };
@@ -146,7 +146,7 @@ Structs are copied by value, not by reference. When we refer to property `bar.Fo
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 6. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 6. What's the output?
 
 ```cs
 foreach (Foo current in Baz().ToList())
@@ -212,7 +212,7 @@ In the first loop we turn `IEnumerable` to `List`, so we end up with a list of r
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 7. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 7. What's the output?
 
 ```cs
 var list = new List<string> { "Foo", "Bar", "Baz" };
@@ -238,7 +238,7 @@ Because of deferred execution, queries are executed only at the point `query.Cou
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 8. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 8. What's the output?
 
 ```cs
 class A
@@ -278,7 +278,7 @@ Contrary to Java, in C# a class is defined as a component that attempts to be se
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 9. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 9. What's the output?
 
 ```cs
 delegate void SomeMethod();
@@ -322,7 +322,7 @@ The tricky part here is understanding closures in C#. When the delegate is creat
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 10. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 10. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -356,7 +356,7 @@ False
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 11. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 11. What's the output?
 
 ```cs
 public class TestStatic {
@@ -402,7 +402,7 @@ In C#, a static constructor (also called a type initializer) is called automatic
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 12. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 12. What's the output?
 
 ```cs
 using System.Threading.Tasks;
@@ -458,7 +458,7 @@ Since Method1() was awaiting Method2(), after Method2() completes, control is re
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 13. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 13. What's the output?
 
 ```cs
 using System;
@@ -505,7 +505,7 @@ It's possible to use Reflection to change the value of a `readonly` field, thoug
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 14. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 14. What's the output?
 
 ```cs
 var s = new S();
@@ -545,7 +545,7 @@ False
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 15. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 15. What's the output?
 
 ```cs
 class Program
@@ -582,7 +582,7 @@ The `Write` method attempts to acquire a lock on the same `syncObject`. Normally
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 16. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 16. What's the output?
 
 ```cs
 int a = 0;
@@ -612,7 +612,7 @@ void Main()
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 17. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 17. What's the output?
 
 ```cs
 static void Main(string[] args)
@@ -659,7 +659,7 @@ When calling `Monitor.Wait(sync)`, `sync` object is released before waiting for 
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 18. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 18. What's the output?
 
 ```cs
 void Foo(object a)
@@ -722,7 +722,7 @@ Version `object` is not suitable because of number of arguments. Among the remai
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 19. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 19. What's the output?
 
 ```cs
 IEnumerable<string> Foo()
@@ -752,7 +752,7 @@ First iteration of foreach `yield return`s "Bar" which is written to console. Se
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 20. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 20. What's the output?
 
 ```cs
 var x = "AB";
@@ -781,7 +781,7 @@ First two will print `True`, because we are comparing by value. Next two are com
 
 ---
 
-###### <img align="center" height="40" src="https://narekmal.com/images/question.png"> &nbsp; 21. What's the output?
+###### <img align="center" height="40" src="https://narekmalk.com/images/question.png"> &nbsp; 21. What's the output?
 
 ```cs
 try
